@@ -76,7 +76,7 @@ export class TempDataService {
 
 
 
-  /*
+  
 
   getQuiz() : Quiz {
     return { 
@@ -101,5 +101,5 @@ export class TempDataService {
             {answer: 'For 40 minutes', correct: false},
           ]}] 
     };
-  }*/
+  }
 }

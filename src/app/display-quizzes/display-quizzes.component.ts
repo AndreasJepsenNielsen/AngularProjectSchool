@@ -23,7 +23,7 @@ export class DisplayQuizzesComponent implements OnInit {
     });
     // this.quizzes = this.data.quizzes;
     
-    console.log("KIG HER",this.quizzes)
+    //console.log("KIG HER",this.quizzes)
     this.temp.quizzes = this.quizzes
   }
 

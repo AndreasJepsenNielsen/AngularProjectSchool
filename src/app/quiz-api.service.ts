@@ -2,13 +2,12 @@ import { Injectable } from '@angular/core';
 import { Quiz } from './entities/quiz';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map, filter, switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuizApiService {
-  private baseUrl: string = 'http://angular2api2.azurewebsites.net/api/internships';
+  private baseUrl: string = 'http://angular2api2.azurewebsites.net/api/internships/';
   
 
   constructor(private http: HttpClient) {}
@@ -21,12 +20,14 @@ export class QuizApiService {
     return this.http.get<Quiz[]>(this.baseUrl)
   }
 
-  updateQuiz(quiz: Quiz) : Observable<any> {
-    return undefined;//this.http.put<Quiz>();
+  updateQuiz(id: string, quiz: Quiz) : Observable<any> {
+    return this.http.put<Quiz>(this.baseUrl + id, quiz)
   }
 
   deleteQuiz(id: string) : Observable<any> {
-    return undefined;
+    const urlDelete = this.baseUrl + id;
+    console.log(urlDelete)
+    return this.http.delete(urlDelete);
   }
 
   getQuiz(quiz: Quiz) : Quiz {

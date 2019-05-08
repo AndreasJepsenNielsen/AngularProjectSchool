@@ -24,7 +24,14 @@ constructor (
     })
   }
 
-  createQuiz(quiz: Quiz) :void {
+  deleteQuiz(quizId: string) : void  {
+    this.ngRedux.dispatch({
+      type: QuizActions.DELETE_QUIZ,
+      payload: {quizId}
+    })
+  }
+
+  createQuiz(quiz: Quiz) : void {
     this.ngRedux.dispatch({
       type: QuizActions.CREATE_QUIZ,
       payload: quiz
