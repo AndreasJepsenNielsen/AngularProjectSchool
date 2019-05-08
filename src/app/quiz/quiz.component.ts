@@ -11,9 +11,12 @@ export class QuizComponent implements OnInit {
   @Input() quizInput: Quiz;
   @Output() quizClicked: EventEmitter<Quiz> = new EventEmitter<Quiz>(); 
 
+  
+
   constructor() { }
 
   ngOnInit() {
+    
   }
 
   emitQuizClicked() {

@@ -21,6 +21,7 @@ export class DisplayQuizComponent implements OnInit {
 
     // Find the quiz object based on id
     this.quiz = this.tempData.findQuiz(id);
+    console.log(this.quiz)
     // Load the quiz in the html
 
   }

@@ -2,8 +2,15 @@ import { QuizActions } from './quiz.actions';
 import { QuizState } from './store';
 import { tassign } from 'tassign';
 import { TempDataService } from './service/temp-data.service';
+import { QuizApiService } from './quiz-api.service';
+import { HttpClient } from '@angular/common/http';
+import { Injector } from '@angular/core';
+import { DisplayQuizComponent } from './display-quiz/display-quiz.component';
 
-let temp = new TempDataService();
+
+let temp = new TempDataService()
+
+
 const INITIAL_STATE: QuizState = {isLoggedIn: false, quizzes: temp.quizzes }
 
 export function quizReducer(state: QuizState = INITIAL_STATE, action:any) {

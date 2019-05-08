@@ -6,6 +6,7 @@ import { Quiz } from '../entities/quiz';
 import { Router } from '@angular/router';
 import { Gender } from '../entities/user';
 import { QuizActions } from '../quiz.actions';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-quiz',
@@ -14,7 +15,7 @@ import { QuizActions } from '../quiz.actions';
 })
 export class CreateQuizComponent implements OnInit {
   createQuiz: FormGroup;
-
+  tempQuiz : Quiz[] = [];
   constructor(private fb: FormBuilder, private data: TempDataService,
     private router: Router, private quizActions: QuizActions, private quizApi: QuizApiService) { }
 
@@ -45,11 +46,14 @@ export class CreateQuizComponent implements OnInit {
     });
     console.log("2");
 
+
     
     // this.data.saveQuiz(quiz);
     
     
   }
+
+
 
   createNewQuestion() {
     const question = this.fb.group({
@@ -80,7 +84,34 @@ export class CreateQuizComponent implements OnInit {
   }
 
 
+  getQuiz(quiz: Quiz) : Quiz {
+    return { 
+      _id: quiz._id, visible: quiz.visible, user: quiz.user, title: quiz.title, 
+     questions: quiz.questions, ratings: quiz.ratings, created: quiz.created
+    };
+  }
+
+  createQuizzes(){
+    
+   this.quizApi.getAllQuizzes().subscribe(res => {
+    res.map(item => {
+      
+      //console.log(this.getQuiz(item))
+      this.data.quizzes.push(this.getQuiz(item))
+      
+      
+    })
+    console.log(this.data.quizzes)
+   }, error => {
+     console.log(error)
+   })
+
+   
+    
+  }
+
   ngOnInit() {
+    this.createQuizzes()
     this.createQuiz = this.fb.group({
       title: [''],
       questions: this.fb.array([]),

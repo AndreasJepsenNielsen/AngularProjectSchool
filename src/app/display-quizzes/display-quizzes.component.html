@@ -1,5 +1,5 @@
-<div *ngFor="let quiz of quizzes">
-
+<div *ngFor="let quiz of quizzes; let i = index">
+  {{i}}
   <app-quiz
     [quizInput]="quiz"
     (quizClicked)="handleQuizClicked($event)"

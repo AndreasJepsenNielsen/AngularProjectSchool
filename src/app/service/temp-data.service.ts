@@ -1,18 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Quiz } from '../entities/quiz';
-import { GeneratedFile } from '@angular/compiler';
-import { getRenderedText } from '@angular/core/src/render3';
+
 import { Gender } from '../entities/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TempDataService {
-  quizzes: Quiz[];
+
+ quizzes: Quiz[]
+ 
+
 
   constructor() {
-    this.quizzes = this.getQuizzes();  
+      
+     this.quizzes = this.getQuizzes()
+     
   }
+
+  
+
 
   saveQuiz(quiz: Quiz): void {
     this.quizzes.push(quiz);
@@ -66,6 +73,11 @@ export class TempDataService {
     ];
   }
 
+
+
+
+  /*
+
   getQuiz() : Quiz {
     return { 
       _id: '1', visible: false, user: {
@@ -89,5 +101,5 @@ export class TempDataService {
             {answer: 'For 40 minutes', correct: false},
           ]}] 
     };
-  }
+  }*/
 }
