@@ -13,11 +13,15 @@ export class QuizApiService {
   constructor(private http: HttpClient) {}
   
   createQuiz(quiz: Quiz) : Observable<any> {
+    //url, body
+    quiz.customerId = 'andr9';
+    quiz.created = new Date();
     return this.http.post(this.baseUrl, quiz);
+    
   }
 
   getAllQuizzes(): Observable<Quiz[]> {
-    return this.http.get<Quiz[]>(this.baseUrl)
+    return this.http.get<Quiz[]>(this.baseUrl);
   }
 
   updateQuiz(id: string, quiz: Quiz) : Observable<any> {
@@ -30,6 +34,12 @@ export class QuizApiService {
     return this.http.delete(urlDelete);
   }
 
+
+
+
+
+
+
   getQuiz(quiz: Quiz) : Quiz {
     return { 
       _id: quiz._id, visible: quiz.visible, user: quiz.user, title: quiz.title, 
@@ -37,10 +47,12 @@ export class QuizApiService {
     };
   }
 
-  createQuizzes() : Quiz[]{
+  createQuizzes(quizzes: Quiz[]) : Quiz[]{
     let tempList : Quiz[] = [];
-   this.getAllQuizzes().subscribe(res => {
-    res.map(item => {
+
+    
+   
+    quizzes.map(item => {
       
       //console.log(this.getQuiz(item))
       tempList.push(this.getQuiz(item))
@@ -48,9 +60,7 @@ export class QuizApiService {
       
     })
     //console.log(tempList)
-   }, error => {
-     console.log(error)
-   })
+   
 
    return tempList;
     

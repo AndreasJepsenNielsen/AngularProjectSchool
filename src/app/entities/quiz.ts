@@ -8,6 +8,7 @@ export class Quiz {
   created?: Date; // ? = optional field
   questions: Question[]; 
   ratings?: Rating[];
+  customerId?: string;
 
   constructor(_id: string, visible: boolean,
      user: User, title: String, questions: Question[], 

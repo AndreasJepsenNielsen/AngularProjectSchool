@@ -1,4 +1,12 @@
-<div *ngFor="let quiz of quizzes; let i = index">
+<div *ngIf="isLoading"> 
+  Please wait, we are loading the quizzes
+</div>
+<div >
+  <mat-form-field>
+    <input matInput [(ngModel)]="search" placeholder="Search for a quiz" value="">
+  </mat-form-field>
+</div>
+<div *ngFor="let quiz of quizzes | quizPipe: search">
   {{i}}
   <app-quiz
     [quizInput]="quiz"
