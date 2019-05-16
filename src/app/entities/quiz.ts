@@ -19,10 +19,12 @@ export class Quiz {
 export class Question {
   title: string;
   options: Option[];
+  answered: boolean = false;
 }
 export class Option {
   answer: string;
   correct: boolean;
+  selected: boolean = false;
 }
 export class Rating {
   grade: number;

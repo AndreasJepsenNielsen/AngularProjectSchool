@@ -14,7 +14,7 @@ export class TempDataService {
 
   constructor() {
       
-     this.quizzes = this.getQuizzes()
+     
      
   }
 
@@ -30,7 +30,7 @@ export class TempDataService {
     return this.quizzes.find(quiz => quiz._id === searchForId);
   }
 
-  getQuizzes() : Quiz[] {
+  /*getQuizzes() : Quiz[] {
     return [
       { 
         _id: '1', visible: false, user: {
@@ -77,7 +77,7 @@ export class TempDataService {
 
 
   
-
+*/
   getQuiz() : Quiz {
     return { 
       _id: '1', visible: false, user: {
@@ -87,19 +87,22 @@ export class TempDataService {
       questions: [
         {title: 'How many feet does a puddle have?', 
           options: [
-            {answer: '1', correct: false},
-            {answer: '2', correct: false},
-            {answer: '3', correct: false},
-            {answer: '4', correct: true}
-          ]
+            {answer: '1', correct: false,selected: false},
+            {answer: '2', correct: false,selected: false},
+            {answer: '3', correct: false,selected: false},
+            {answer: '4', correct: true,selected: false},
+            
+
+          ],answered: false
         },
         {title: 'How long do you need to walk a dog?', 
           options: [
-            {answer: 'For 10 minutes', correct: false},
-            {answer: 'For 20 minutes', correct: false},
-            {answer: 'For 30 minutes', correct: true},
-            {answer: 'For 40 minutes', correct: false},
-          ]}] 
+            {answer: 'For 10 minutes', correct: false,selected: false},
+            {answer: 'For 20 minutes', correct: false,selected: false},
+            {answer: 'For 30 minutes', correct: true,selected: false},
+            {answer: 'For 40 minutes', correct: false,selected: false},
+          ],answered: false} ]
+          
     };
   }
 }

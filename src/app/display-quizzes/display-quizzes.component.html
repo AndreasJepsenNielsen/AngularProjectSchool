@@ -8,7 +8,7 @@
 </div>
 <div *ngFor="let quiz of quizzes | quizPipe: search">
   {{i}}
-  <app-quiz
+  <app-quiz class="my-card"
     [quizInput]="quiz"
     (quizClicked)="handleQuizClicked($event)"
   ></app-quiz>

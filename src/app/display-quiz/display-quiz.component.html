@@ -1,15 +1,42 @@
-
+<div *ngIf="mode=='quiz'">
 <div >
   Quiz title: {{quiz.title}}
 </div>
 
 <div *ngFor="let question of quiz.questions">
-  {{question.title}}
+  {{question?.title}}
 
   <div *ngFor="let option of question.options">
-    {{option.answer}}
+    <mat-radio-button name="{{question.title}}" (change)="onSelect(question, option);" value="{{option.answer}}" style="margin-right: 10px;"> {{option.answer}}</mat-radio-button>
+    
   </div>
+
+
   
   <br>
-</div>
 
+
+
+ 
+</div>
+<button class="btn btn-primary" (click)="onSubmit();">Submit Quiz</button>
+</div>
+ <div class="result" *ngIf="mode=='result'">
+    <h2>Quiz Result</h2>
+    <div *ngFor="let question of quiz.questions; let index = index">
+      <div class="result-question">
+        <h5>{{index + 1}}. {{question.title}}</h5>
+        <div class="row">
+          <div class="col-6" *ngFor="let Option of question.options">
+            <input id="{{Option.answer}}" type="checkbox" disabled="disabled" [(ngModel)]="Option.selected" /> {{Option.answer}}
+          </div>
+        </div>
+        <div class="p-1 m-2 alert {{ isCorrect(question) == 'correct'? 'alert-success': 'alert-danger'}}">Your answer is {{isCorrect(question)}}.</div>
+      </div>
+    </div>
+  
+
+
+    <button type="button" mat-raised-button color="primary" [routerLink]="['/portal']"   >Back</button>
+  </div>
+  <hr />

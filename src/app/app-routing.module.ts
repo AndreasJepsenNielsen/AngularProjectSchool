@@ -7,8 +7,6 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { DisplayQuizComponent } from './display-quiz/display-quiz.component';
-import { MortenComponent } from './morten/morten.component';
-import { JosefComponent } from './josef/josef.component';
 import { HomeComponent } from './home/home.component';
 import { PortalComponent } from './portal/portal.component';
 import { DisplayQuizzesComponent } from './display-quizzes/display-quizzes.component';
@@ -20,14 +18,11 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent, children: [
     {path: 'about', component: AboutComponent},
     {path: 'contact', component: ContactComponent},
-    {path: 'login', component: LoginComponent, children: [
-      { path: 'morten', component: MortenComponent },
-      { path: 'josef', component: JosefComponent }
-    ]},
+    {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent}
   ]},
   
-  {path: 'portal', component:PortalComponent, /*canActivate: [AuthGuard],*/ children: [
+  {path: 'portal', component:PortalComponent, canActivate: [AuthGuard], children: [
     {path: 'display-quiz/:id', component:DisplayQuizComponent},  
     {path: 'create-quiz', component:CreateQuizComponent},  
     {path: 'display-quizzes', component:DisplayQuizzesComponent},  
