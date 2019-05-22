@@ -51,7 +51,7 @@ constructor (
     })
   }
 
-  deleteQuiz(quizId: string) : any  {
+  deleteQuiz(quizId: string) : void  {
     this.ngRedux.dispatch({
       type: QuizActions.DELETE_QUIZ,
       payload: {quizId}
