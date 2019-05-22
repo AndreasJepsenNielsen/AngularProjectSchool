@@ -65,6 +65,13 @@ constructor (
     }); 
   }
 
+  updateQuiz(quiz: Quiz, quizId: string) : void {
+    this.ngRedux.dispatch({
+      type: QuizActions.CREATE_QUIZ,
+      payload: {quiz, quizId}
+    }); 
+  }
+
   setLoggedIn(isLoggedIn: boolean): void {
     console.log(isLoggedIn);
     

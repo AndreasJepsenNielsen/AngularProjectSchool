@@ -3,6 +3,7 @@ import { QuizActions } from './../quiz.actions';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Quiz } from '../entities/quiz';
 import { QuizApiService } from '../quiz-api.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,7 +17,7 @@ export class QuizComponent implements OnInit {
 
   
 
-  constructor(private quizApi: QuizApiService, private quizActions: QuizActions, private temp: TempDataService) { }
+  constructor(private quizApi: QuizApiService, private quizActions: QuizActions, private router: Router) { }
 
   ngOnInit() {
     
@@ -50,25 +51,12 @@ export class QuizComponent implements OnInit {
 
   }
 
-  updateQuizClicked() {
+  updateQuizClicked(id: string) {
 
 
-    let quiz : Quiz
+    this.router.navigate(['portal/update-quiz/' + id])
 
-    quiz = this.temp.getQuiz()
-
-    quiz._id = this.quizInput._id
-
-    console.log(this.quizInput._id)
-
-    this.quizApi.updateQuiz(quiz._id,quiz).subscribe(quizUpdated => {
-      console.log(quizUpdated)
-    }, error => {
-      console.log("SOmething bad happened", error)
-    })
-
-    console.log("Updated" + this.quizInput)
-
+    
   }
 
 }

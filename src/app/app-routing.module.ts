@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { PortalComponent } from './portal/portal.component';
 import { DisplayQuizzesComponent } from './display-quizzes/display-quizzes.component';
 import { CreateQuizComponent } from './create-quiz/create-quiz.component';
+import { UpdateQuizComponent } from './update-quiz/update-quiz.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home/login', pathMatch: 'full' }, // if baseUrl => go to login
@@ -26,6 +27,7 @@ const routes: Routes = [
     {path: 'display-quiz/:id', component:DisplayQuizComponent},  
     {path: 'create-quiz', component:CreateQuizComponent},  
     {path: 'display-quizzes', component:DisplayQuizzesComponent},  
+    {path: 'update-quiz/:id', component:UpdateQuizComponent},  
   ]},
   
 

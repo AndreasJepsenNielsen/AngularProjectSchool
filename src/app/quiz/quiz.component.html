@@ -15,6 +15,6 @@
   <mat-card-actions>
     <button mat-button routerLink="../display-quiz/{{quizInput._id}}">Start Quiz</button>
     <button mat-button (click)="deleteQuizClicked()">Delete Quiz</button>
-    <button mat-button (click)="updateQuizClicked()">Update Quiz</button>
+    <button mat-button routerLink="../update-quiz/{{quizInput._id}}">Update Quiz</button>
   </mat-card-actions>
 </mat-card>

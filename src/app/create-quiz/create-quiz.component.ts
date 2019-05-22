@@ -6,7 +6,6 @@ import { Quiz } from '../entities/quiz';
 import { Router } from '@angular/router';
 import { Gender } from '../entities/user';
 import { QuizActions } from '../quiz.actions';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-quiz',
