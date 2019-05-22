@@ -53,7 +53,7 @@ export class CreateQuizComponent implements OnInit {
   }
 
 
-
+ 
   createNewQuestion() {
     const question = this.fb.group({
       title: ['', Validators.required],
@@ -122,6 +122,7 @@ export class CreateQuizComponent implements OnInit {
       // option2_1: [''], 
       // option2_2: [''], 
       // option2_3: [''], 
+      
     })
   }
 }

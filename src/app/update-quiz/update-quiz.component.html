@@ -4,31 +4,23 @@
       <input matInput placeholder="Quiz Title" formControlName="title">
     </mat-form-field>
   </div>
-  <div>
-    <button style="margin-bottom: 10px;"  type="button" mat-raised-button color="secondary" (click)="createNewQuestion()">New Question</button>
-  </div>
 
-  <div  formArrayName="questions">
-    <div  *ngFor="let questionControl of createQuiz.controls.questions.controls; let i=index">
-      <div [formGroupName]="i">
-          <mat-form-field style="margin-right: 10px;" >
-            <input  matInput placeholder="Question" formControlName="title">
-          </mat-form-field>
-          <button type="button" mat-raised-button color="secondary" (click)="createNewOption(i)">New Option</button>
-          
-          <div formArrayName="options">
-              <div *ngFor="let optionControl of questionControl.controls.options.controls; let j=index">
-                  <div [formGroupName]="j">
-                    <mat-form-field style="margin-right: 10px;">
-                      <input matInput placeholder="Option" formControlName="answer">
-                    </mat-form-field >
-                    <mat-checkbox formControlName="correct" style="margin-right: 10px;">Correct answer</mat-checkbox>
-                </div>
-              </div>
-          </div>
-      </div>
+
+
+
+
+
+ 
+  <div  *ngFor="let question of updateQuiz.controls.questions.controls" >
+    <mat-form-field >
+      <p>{{question.title}}</p>
+    <input matInput value="{{question.value.title}}"  >
+    </mat-form-field >
+      
+  
     </div>
-  </div>
+
+
 
 
   <!-- <mat-accordion>
