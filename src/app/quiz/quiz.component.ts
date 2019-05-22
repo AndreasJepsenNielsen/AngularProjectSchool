@@ -16,7 +16,7 @@ export class QuizComponent implements OnInit {
 
   
 
-  constructor(private quizApi: QuizApiService, private actions: QuizActions, private temp: TempDataService) { }
+  constructor(private quizApi: QuizApiService, private quizActions: QuizActions, private temp: TempDataService) { }
 
   ngOnInit() {
     
@@ -27,19 +27,27 @@ export class QuizComponent implements OnInit {
   }
 
   deleteQuizClicked() {
-    
+    console.log(this.quizInput._id)
+
     this.quizApi.deleteQuiz(this.quizInput._id).subscribe(quizDeleted => {
+      
+      //console.log(this.actions.deleteQuiz(this.quizInput._id))
     
+      
       console.log(quizDeleted);
       
 
     }, error => {
       // write some code for if the ws breaks.
       console.log("Something bad happened", error);
+
       // this.quizActions.createQuizFailed(error);
     });
 
-    this.actions.deleteQuiz(this.quizInput._id);
+    this.quizActions.deleteQuiz(this.quizInput._id);    
+    
+    
+
   }
 
   updateQuizClicked() {

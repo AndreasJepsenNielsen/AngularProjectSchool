@@ -46,9 +46,6 @@ export function quizReducer(state: QuizState = INITIAL_STATE, action:any) {
     let quizArray = [...state.quizzes.slice(0,pos), quizToUpdate, ...state.quizzes.slice(pos+1)];
     quizArray[pos].ratings = ratingArr;
 
-    console.log("ratingArr", ratingArr);
-    console.log("quizArray", quizArray);
-
     return tassign(state, {quizzes: quizArray});
     
    case QuizActions.UPDATE_QUIZ:
@@ -60,8 +57,15 @@ export function quizReducer(state: QuizState = INITIAL_STATE, action:any) {
     // action.payload: id of the quiz
     // How to create a new array with a missing object from another array.
     // const newArray = state.quizzes.filter(x => x._id !== action.payload);
+    console.log(action.payload)
+    console.log(state.quizzes.filter(quiz => quiz._id !== action.payload))
+    console.log(tassign(state, {quizzes: state.quizzes.filter((quiz) => quiz._id !== action.payload)}))
     
-    return tassign(state, {quizzes: state.quizzes.filter(quiz => quiz._id !== action.payload)});
+    const id = action.payload
+
+    console.log(action.payload.quizId.toString())
+ 
+    return tassign(state, {quizzes: state.quizzes.filter(quiz => quiz._id !== action.payload._id)});
 
 
   case QuizActions.LOG_IN:

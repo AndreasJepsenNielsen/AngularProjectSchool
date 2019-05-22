@@ -84,7 +84,7 @@ export class CreateQuizComponent implements OnInit {
   }
 
 
-  getQuiz(quiz: Quiz) : Quiz {
+ /* getQuiz(quiz: Quiz) : Quiz {
     return { 
       _id: quiz._id, visible: quiz.visible, user: quiz.user, title: quiz.title, 
      questions: quiz.questions, ratings: quiz.ratings, created: quiz.created
@@ -108,10 +108,10 @@ export class CreateQuizComponent implements OnInit {
 
    
     
-  }
+  }*/
 
   ngOnInit() {
-    this.createQuizzes()
+    //this.createQuizzes()
     this.createQuiz = this.fb.group({
       title: [''],
       questions: this.fb.array([]),

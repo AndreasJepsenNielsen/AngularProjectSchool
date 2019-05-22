@@ -10,21 +10,18 @@ export class Quiz {
   ratings?: Rating[];
   customerId?: string;
 
-  constructor(_id: string, visible: boolean,
-     user: User, title: String, questions: Question[], 
-     created?: Date, ratings?: Rating[]){}
 }
 
 
 export class Question {
   title: string;
   options: Option[];
-  answered: boolean = false;
+  answered?: boolean = false;
 }
 export class Option {
   answer: string;
   correct: boolean;
-  selected: boolean = false;
+  selected?: boolean = false;
 }
 export class Rating {
   grade: number;
