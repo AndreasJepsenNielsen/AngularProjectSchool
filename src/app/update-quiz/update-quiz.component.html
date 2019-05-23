@@ -5,17 +5,42 @@
     </mat-form-field>
   </div>
 
-  <div  *ngFor="let question of updateQuiz.controls.questions.controls" >
-    <mat-form-field >
-      <p>{{question.title}}</p>
-      <p>{{question.questions}}</p>
 
+
+
+
+
+ 
+  <div  *ngFor="let question of updateQuiz.controls.questions.controls | slice:1" >
+    <mat-form-field style="margin-right: 10px;" >
+      <input matInput value="{{question.value.title.title}}">
+      
+      
+      <!--<input matInput value="{{question.value.questions}}">-->
     </mat-form-field >
+    <div *ngFor="let option of question.value.title.options | slice:0" >
+        <mat-form-field style="margin-right: 10px;" >
+        <input matInput name="{{option}}" value="{{option.answer}}">
+      
+      </mat-form-field >
+      
+        <div *ngIf="option.correct === true">
+        
+            <mat-radio-button name="{{question.value.title.title}}" value="{{option.answer}}" checked="true" style="margin-right: 10px;"> Correct Answer </mat-radio-button>
+            
+        </div>
+        <div *ngIf="option.correct === false">
+        
+            <mat-radio-button name="{{question.value.title.title}}" value="{{option.answer}}" checked="false" style="margin-right: 10px;"> Correct Answer </mat-radio-button>
+            
+        </div>
+      
+      
 
-    
-
+      
 
     </div>
+  </div>
 
 
 
@@ -54,5 +79,5 @@
     </mat-accordion> -->
 
 
-  <button mat-raised-button color="primary">Save Quiz</button>
+  <button mat-raised-button style="margin-top: 10px;" color="primary">Save Quiz</button>
 </form>
