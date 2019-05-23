@@ -8,6 +8,13 @@
     <button style="margin-bottom: 10px;"  type="button" mat-raised-button color="secondary" (click)="createNewQuestion()">New Question</button>
   </div>
 
+
+  <div *ngFor="let test of quiz.options; let j=index">
+    <a>{{test}}</a>
+    
+  </div>
+
+
   <div  formArrayName="questions">
     <div  *ngFor="let questionControl of createQuiz.controls.questions.controls; let i=index">
       <div [formGroupName]="i">
