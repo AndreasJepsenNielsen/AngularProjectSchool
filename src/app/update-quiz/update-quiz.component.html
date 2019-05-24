@@ -10,36 +10,40 @@
 
 
 
- 
-  <div  *ngFor="let question of updateQuiz.controls.questions.controls | slice:1" >
+
+  <div formArrayName="questions" *ngFor="let question of updateQuiz.controls.questions.controls | slice:1; let j=index " >
+    <div [formGroupName]="j">
     <mat-form-field style="margin-right: 10px;" >
-      <input matInput formControlName="questions" value="{{question.value.title.title}}">
+      <input matInput formControlName="title" value="{{question.value.title}}">
       
       
       <!--<input matInput value="{{question.value.questions}}">-->
     </mat-form-field >
-    <div *ngFor="let option of question.value.title.options | slice:0" >
+    <div  formArrayName="options" >
+    <div *ngFor="let option of question.controls.title.value.options let i=index" >
+      <div [formGroupName]="i">
         <mat-form-field style="margin-right: 10px;" >
-        <input matInput formControlName="answer" name="{{option}}" value="{{option.answer}}">
-      
+        <input matInput formControlName="answer" name="{{option}}" >
+
       </mat-form-field >
-      
         <div *ngIf="option.correct === true">
         
-            <mat-radio-button formControlName="correct" name="{{question.value.title.title}}" value="{{option.answer}}" checked="true" style="margin-right: 10px;"> Correct Answer </mat-radio-button>
+            <mat-radio-button formControlName="correct" name="{{question.title.title}}"  checked="true" style="margin-right: 10px;"> Correct Answer </mat-radio-button>
             
         </div>
         <div *ngIf="option.correct === false">
         
-            <mat-radio-button formControlName="correct" name="{{question.value.title.title}}" value="{{option.answer}}" checked="false" style="margin-right: 10px;"> Correct Answer </mat-radio-button>
+            <mat-radio-button formControlName="correct" name="{{question.title.title}}"  checked="false" style="margin-right: 10px;"> Correct Answer </mat-radio-button>
             
         </div>
       
-      
+      </div>
 
       
 
     </div>
+  </div>
+  </div>
   </div>
 
 
