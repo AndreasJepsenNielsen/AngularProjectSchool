@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgRedux } from '@angular-redux/store';
 import { AppState } from '../store';
 import { Quiz, Option, Question } from '../entities/quiz';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { QuizActions } from '../quiz.actions';
+import { QuizApiService } from '../quiz-api.service';
+import { Gender } from '../entities/user';
 
 @Component({
   selector: 'app-update-quiz',
@@ -15,10 +17,10 @@ export class UpdateQuizComponent implements OnInit {
   quiz: Quiz;
   updateQuiz: FormGroup;
 
-  constructor(private route: ActivatedRoute, private ngRedux: NgRedux<AppState>, private fb: FormBuilder,private quizActions: QuizActions) { }
+  constructor(private router: Router, private route: ActivatedRoute, private ngRedux: NgRedux<AppState>, private fb: FormBuilder,private quizActions: QuizActions, private quizApi: QuizApiService) { }
 
   get questions() { return (this.updateQuiz.get('questions')) as FormArray; }
-  get options() { return (this.updateQuiz.get(['questions', 'options']).value) as FormArray; }
+  get options() { return (this.updateQuiz.get(['questions', 'options'])) as FormArray; }
 
   
 
@@ -37,20 +39,23 @@ export class UpdateQuizComponent implements OnInit {
       title: [this.quiz.title, Validators.required],
       questions: this.fb.array([
         this.fb.group({options: this.fb.array([
+          this.fb.group({
+            answer: "",
+            correct: false
+          })
         ])})
-      ]), 
-      
+      ]),  
     })
 
     for( let i = 0; i < this.quiz.questions.length; i++){
 
       this.addProduct(this.quiz.questions[i])
 
+        for (let j = 0; j < this.quiz.questions[i].options.length; j++) {
+          this.addOption(this.quiz.questions[i].options[j]);
+        }
     }
-
     console.log(this.updateQuiz)
-
-
   }
 
 
@@ -65,6 +70,19 @@ export class UpdateQuizComponent implements OnInit {
     this.options.push(this.fb.group({
       answer: j
     }))
+  }
+
+  updateQuizSubmit() {
+    let quizUpdate = this.updateQuiz.value as Quiz;
+
+    this.quizApi.updateQuiz(this.quiz._id, quizUpdate).subscribe(updateTheQuiz => {
+      console.log("updatethequiz: " + updateTheQuiz);
+      this.quizActions.updateQuiz(updateTheQuiz, this.quiz._id);
+      this.router.navigate(['/portal/display-quizzes']);
+    }, error => {
+      console.log("something bad when updating the quiz happened", error);
+    });
+
   }
 
 

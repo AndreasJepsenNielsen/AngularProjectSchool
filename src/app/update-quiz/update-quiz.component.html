@@ -1,4 +1,4 @@
-<form [formGroup]="updateQuiz" (ngSubmit)="saveQuiz()">
+<form [formGroup]="updateQuiz" (ngSubmit)="updateQuizSubmit()">
   <div>
     <mat-form-field >
       <input matInput placeholder="Quiz Title" formControlName="title">
@@ -13,25 +13,25 @@
  
   <div  *ngFor="let question of updateQuiz.controls.questions.controls | slice:1" >
     <mat-form-field style="margin-right: 10px;" >
-      <input matInput value="{{question.value.title.title}}">
+      <input matInput formControlName="questions" value="{{question.value.title.title}}">
       
       
       <!--<input matInput value="{{question.value.questions}}">-->
     </mat-form-field >
     <div *ngFor="let option of question.value.title.options | slice:0" >
         <mat-form-field style="margin-right: 10px;" >
-        <input matInput name="{{option}}" value="{{option.answer}}">
+        <input matInput formControlName="answer" name="{{option}}" value="{{option.answer}}">
       
       </mat-form-field >
       
         <div *ngIf="option.correct === true">
         
-            <mat-radio-button name="{{question.value.title.title}}" value="{{option.answer}}" checked="true" style="margin-right: 10px;"> Correct Answer </mat-radio-button>
+            <mat-radio-button formControlName="correct" name="{{question.value.title.title}}" value="{{option.answer}}" checked="true" style="margin-right: 10px;"> Correct Answer </mat-radio-button>
             
         </div>
         <div *ngIf="option.correct === false">
         
-            <mat-radio-button name="{{question.value.title.title}}" value="{{option.answer}}" checked="false" style="margin-right: 10px;"> Correct Answer </mat-radio-button>
+            <mat-radio-button formControlName="correct" name="{{question.value.title.title}}" value="{{option.answer}}" checked="false" style="margin-right: 10px;"> Correct Answer </mat-radio-button>
             
         </div>
       
