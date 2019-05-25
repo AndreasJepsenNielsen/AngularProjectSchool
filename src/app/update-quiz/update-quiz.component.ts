@@ -40,27 +40,33 @@ export class UpdateQuizComponent implements OnInit {
       title: this.quiz.title,
       questions: this.fb.array([
         this.fb.group({
-          title: ""
-          ,options: this.fb.array([
-          this.fb.group({
-            answer: "",
-            correct: false
-          })
-        ])
-      })
+          title: "",
+          options: this.fb.array([
+            this.fb.group({
+              answer: '',
+              correct: false
+            })
+      ])
+      }),
+      
+      
       ]),  
     })
 
     for( let i = 0; i < this.quiz.questions.length; i++){
 
       this.addProduct(this.quiz.questions[i])
-        for (let j = 0; j < this.quiz.questions[i].options.length; j++) {
-          console.log(this.quiz.questions[i].options[j])
-          this.addOption(this.quiz.questions[i].options[j]);
-        }
+      console.log((<FormArray>(this.questions.controls[i])).controls['options'])
+      console.log((<FormArray>(this.questions.controls[i])))
+      console.log(this.questions)
+      console.log(this.questions.controls[i])
+      this.quiz.questions[i].options.forEach(element => {
+        //console.log(element)
+      });
+        
     }
     this.questions.removeAt(0)
-    console.log(this.updateQuiz)
+    //console.log(this.updateQuiz)
 
   }
 
@@ -68,14 +74,15 @@ export class UpdateQuizComponent implements OnInit {
 
   addProduct(i: Question) {
     this.questions.push(this.fb.group({
-      title: i
+      title: i.title,
+      options: i.options
     }));
   }
 
   addOption(j: Option) {
     if(this.options){
-      console.log(j)
-      console.log(j.answer)
+      //console.log(j)
+      //console.log(j.answer)
       let option: Option;
       option.answer = j.answer
       option.correct = j.correct
@@ -97,16 +104,4 @@ export class UpdateQuizComponent implements OnInit {
     });
 
   }
-
-
-  
-
-
-
-
-
-
-
-
-
 }

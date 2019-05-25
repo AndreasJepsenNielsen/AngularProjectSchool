@@ -11,16 +11,16 @@
 
 
 
-  <div formArrayName="questions" *ngFor="let question of updateQuiz.controls.questions.controls | slice:1; let j=index " >
+  <div formArrayName="questions" *ngFor="let question of updateQuiz.controls.questions.controls; let j=index " >
     <div [formGroupName]="j">
     <mat-form-field style="margin-right: 10px;" >
-      <input matInput formControlName="title" value="{{question.value.title}}">
+      <input matInput formControlName="title" value="{{question.value.title.title}}">
       
       
       <!--<input matInput value="{{question.value.questions}}">-->
     </mat-form-field >
-    <div  formArrayName="options" >
-    <div *ngFor="let option of question.controls.title.value.options let i=index" >
+    <div formArrayName="options" >
+    <div *ngFor="let option of question.controls.value.title.options; let i=index" >
       <div [formGroupName]="i">
         <mat-form-field style="margin-right: 10px;" >
         <input matInput formControlName="answer" name="{{option}}" >
