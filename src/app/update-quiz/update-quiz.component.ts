@@ -20,7 +20,7 @@ export class UpdateQuizComponent implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute, private ngRedux: NgRedux<AppState>, private fb: FormBuilder,private quizActions: QuizActions, private quizApi: QuizApiService) { }
 
   get questions() { return (this.updateQuiz.get('questions')) as FormArray; }
-  get options () { return (<FormArray>(this.questions).controls['options'])}
+  get options () { return (this.updateQuiz.get(['questions', 'options'])) as FormArray;}
   
 
   
@@ -35,17 +35,17 @@ export class UpdateQuizComponent implements OnInit {
 
     console.log(this.quiz._id)
     console.log(this.quiz.questions)
-    
+   
     this.updateQuiz = this.fb.group({
       title: this.quiz.title,
       questions: this.fb.array([
         this.fb.group({
           title: "",
           options: this.fb.array([
-            this.fb.group({
-              answer: '',
-              correct: false
-            })
+           this.fb.group({
+             answer: "",
+             correct: false
+           })
       ])
       }),
       
@@ -57,16 +57,18 @@ export class UpdateQuizComponent implements OnInit {
 
       this.addProduct(this.quiz.questions[i])
       console.log((<FormArray>(this.questions.controls[i])).controls['options'])
-      console.log((<FormArray>(this.questions.controls[i])))
-      console.log(this.questions)
-      console.log(this.questions.controls[i])
+
+      console.log(this.questions.controls[i].get('options'))
       this.quiz.questions[i].options.forEach(element => {
-        //console.log(element)
-      });
+        console.log()
+        console.log(this.options);
         
-    }
+        })
+      }
+        
+    
     this.questions.removeAt(0)
-    //console.log(this.updateQuiz)
+    console.log(this.updateQuiz)
 
   }
 
