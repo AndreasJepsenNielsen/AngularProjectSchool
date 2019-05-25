@@ -1,16 +1,19 @@
 <div *ngIf="isLoading"> 
-  Please wait, we are loading the quizzes
+  <p class="mat-subheading-2" style="text-align:center">Please wait, we are loading the quizzes</p>
+  <mat-spinner class="loader"></mat-spinner>
 </div>
-<div style="text-align: center" >
-  <mat-form-field style="text-align: center">
+<div *ngIf="!isLoading">
+<div style="text-align: center">
+  <mat-form-field style="text-align: center; width:20%">
     <input matInput [(ngModel)]="search" placeholder="Search for a quiz" value="">
   </mat-form-field>
 </div>
+<div>
 <div *ngFor="let quiz of quizzes | quizPipe: search">
   {{i}}
   <app-quiz class="my-card"
     [quizInput]="quiz"
     (quizClicked)="handleQuizClicked($event)"
   ></app-quiz>
-
+</div>
 </div>
