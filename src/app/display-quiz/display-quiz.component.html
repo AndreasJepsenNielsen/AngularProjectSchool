@@ -1,37 +1,37 @@
-<div *ngIf="mode=='quiz'">
-<div >
+<div style="margin-top: 80px; text-align: center" *ngIf="mode=='quiz'">
+<div class="mat-title" >
   Quiz title: {{quiz.title}}
 </div>
 
 <div *ngFor="let question of quiz.questions">
-  {{question?.title}}
+  <div class="mat-title" >{{question?.title}}</div>
 
   <div *ngFor="let option of question.options">
-    <mat-radio-button name="{{question.title}}" (change)="onSelect(question, option);" value="{{option.answer}}" style="margin-right: 10px;"> {{option.answer}}</mat-radio-button>
+    <mat-radio-button name="{{question.title}}" (change)="onSelect(question, option);" value="{{option.answer}}" style="margin-right: 10px;"> <p class="mat-body" >{{option.answer}}</p></mat-radio-button>
     
   </div>
   <br>
 
  
 </div>
-<button class="btn btn-primary" (click)="onSubmit();">Submit Quiz</button>
+<button mat-raised-button type="button" color="primary" (click)="onSubmit();">Submit Quiz</button>
 </div>
- <div class="result" *ngIf="mode=='result'">
-    <h2>Quiz Result</h2>
+ <div style="margin-top: 80px; text-align: center" class="result" *ngIf="mode=='result'">
+    <div class="mat-title" >Quiz Result</div>
     <div *ngFor="let question of quiz.questions; let index = index">
       <div class="result-question">
-        <h5>{{index + 1}}. {{question.title}}</h5>
+        <h5 class="mat-title" >{{index + 1}}. {{question.title}}</h5>
         <div class="row">
           <div class="col-6" *ngFor="let Option of question.options">
-            <input id="{{Option.answer}}" type="checkbox" disabled="disabled" [(ngModel)]="Option.selected" /> {{Option.answer}}
+            <mat-checkbox id="{{Option.answer}}" disabled="disabled"  [(ngModel)]="Option.selected" ><p class="mat-body" >{{Option.answer}}</p></mat-checkbox>
           </div>
         </div>
-        <div class="p-1 m-2 alert {{ isCorrect(question) == 'correct'? 'alert-success': 'alert-danger'}}">Your answer is {{isCorrect(question)}}.</div>
+        <div style="margin-bottom: 13px;" class="mat-body {{ isCorrect(question) == 'correct'? 'green': 'red'}}">Your answer is {{isCorrect(question)}}.</div>
       </div>
     </div>
   
 
 
-    <button type="button" mat-raised-button color="primary" [routerLink]="['/portal']">Back</button>
+    <button type="button" mat-raised-button color="primary" [routerLink]="['/portal/display-quizzes']">Back</button>
   </div>
   <hr />
