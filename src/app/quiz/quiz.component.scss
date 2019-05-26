@@ -1,5 +1,7 @@
 .example-card {
-  max-width: 300px;
+  margin-bottom: 2px;
+  margin-top: 10px;
+  max-width: 450px;
 }
 
 .example-header-image {
@@ -13,4 +15,13 @@
 
 .example-spacer {
   flex: 1 1 auto;
+}
+
+
+mat-card-actions{
+  text-align: center;
+}
+
+button{
+  
 }

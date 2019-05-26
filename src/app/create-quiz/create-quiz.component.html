@@ -5,16 +5,16 @@
     </mat-form-field>
   </div>
   <div>
-    <button style="margin-bottom: 10px;"  type="button" mat-raised-button color="secondary" (click)="createNewQuestion()">New Question</button>
+    <button style="margin-bottom: 10px;"  type="button" mat-raised-button color="accent" (click)="createNewQuestion()">New Question</button>
   </div>
 
   <div  formArrayName="questions">
     <div  *ngFor="let questionControl of createQuiz.controls.questions.controls; let i=index">
       <div [formGroupName]="i">
-          <mat-form-field style="margin-right: 10px;" >
+          <mat-form-field style="margin-right: 45px;" >
             <input  matInput placeholder="Question" formControlName="title">
           </mat-form-field>
-          <button type="button" mat-raised-button color="secondary" (click)="createNewOption(i)">New Option</button>
+          <button type="button" mat-raised-button color="accent" (click)="createNewOption(i)">New Option</button>
           
           <div formArrayName="options">
               <div *ngFor="let optionControl of questionControl.controls.options.controls; let j=index">
@@ -65,5 +65,5 @@
     </mat-accordion> -->
 
 
-  <button mat-raised-button color="primary">Save Quiz</button>
+  <button mat-raised-button color="primary" style="margin-bottom:15px">Save Quiz</button>
 </form>

@@ -3,7 +3,7 @@
 
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>{{quizInput.title | uppercase}}</mat-card-title>
+    <mat-card-title title="{{quizInput.title}}">{{(quizInput.title.length>16)?  (quizInput.title | slice:0:16 | uppercase)+'...'  :(quizInput.title)  }}</mat-card-title>
     <mat-card-subtitle>Created: {{quizInput.created | date: 'dd/MM/yyyy'}}</mat-card-subtitle>
   </mat-card-header>
   <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
@@ -13,8 +13,8 @@
     <p>In this quiz we have {{quizInput.questions.length}} question{{quizInput.questions.length>1 || quizInput.questions.length===0?'s':''}}</p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button routerLink="../display-quiz/{{quizInput._id}}">Start Quiz</button>
-    <button mat-button (click)="deleteQuizClicked()">Delete Quiz</button>
-    <button mat-button routerLink="../update-quiz/{{quizInput._id}}">Update Quiz</button>
+    <button mat-raised-button color="primary" routerLink="../display-quiz/{{quizInput._id}}">Start Quiz</button>
+    <button mat-raised-button color="primary" routerLink="../update-quiz/{{quizInput._id}}">Update Quiz</button>
+    <button mat-raised-button color="primary" style="margin-top: 5px;" (click)="deleteQuizClicked()">Delete Quiz</button>
   </mat-card-actions>
 </mat-card>

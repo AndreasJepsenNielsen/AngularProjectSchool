@@ -2,3 +2,8 @@
 @import "theme.scss";
 @include mat-core();
 @include angular-material-theme($my-theme);
+
+html {
+    background-color: #E8F5E9
+    ; 
+}
