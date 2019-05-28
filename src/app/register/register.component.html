@@ -1,3 +1,50 @@
-<p>
-  register works!
-</p>
+<mat-card class="mat-card-all">
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <mat-card-header>
+    
+      <p class="mat-title" >Register</p>
+  
+  </mat-card-header>
+  <mat-card-content>
+  <div>
+    <mat-form-field appearance="outline">
+      <input matInput type="text" formControlName="username" placeholder="Username">
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="outline">
+      <input matInput type="password" formControlName="password" placeholder="Password">
+    </mat-form-field>
+  </div>
+
+  <div>
+  <mat-form-field appearance="outline"> 
+    <input matInput type="email" formControlName="email" placeholder="Email">
+  </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="outline"> 
+      <mat-select placeholder="Gender">
+        <mat-option value="Male">Male</mat-option>
+        <mat-option value="Female">Female</mat-option>
+        <mat-option value="Other">Other</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div>
+      <mat-form-field appearance="outline">
+          <input matInput [matDatepicker]="picker" formControlName="birthdate" placeholder="Birthdate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+        </mat-form-field>
+  </div>
+</mat-card-content>
+  
+
+
+  <button mat-raised-button color=accent [routerLink]="['/home/login']" routerLinkActive="router-link-active"  type="submit" >Register</button>
+</form>
+</mat-card>

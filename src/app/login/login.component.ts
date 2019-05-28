@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
       console.log("First");
       this.authService.login().subscribe(result => {
         console.log("Third");
-        this.router.navigate(['portal/display-quizzes']);  
+        this.router.navigate(['portal/index']);  
       });
 
       console.log("Second");

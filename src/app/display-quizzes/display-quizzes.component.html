@@ -10,7 +10,7 @@
 <div>
 <div *ngFor="let quiz of quizzes | quizPipe: search">
   {{i}}
-  <app-quiz class="my-card"
+  <app-quiz id="{{quiz._id}}" class="my-card"
     [quizInput]="quiz"
     (quizClicked)="handleQuizClicked($event)"
   ></app-quiz>

@@ -13,7 +13,7 @@
     <p>In this quiz we have {{quizInput.questions.length}} question{{quizInput.questions.length>1 || quizInput.questions.length===0?'s':''}}</p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button color="primary" routerLink="../display-quiz/{{quizInput._id}}">Start Quiz</button>
+    <button mat-raised-button color="primary" id="startQuiz" routerLink="../display-quiz/{{quizInput._id}}">Start Quiz</button>
     <button mat-raised-button color="primary" routerLink="../update-quiz/{{quizInput._id}}">Update Quiz</button>
     <button mat-raised-button color="primary" style="margin-top: 5px;" (click)="deleteQuizClicked()">Delete Quiz</button>
   </mat-card-actions>

@@ -1,18 +1,18 @@
 <form [formGroup]="createQuiz" (ngSubmit)="saveQuiz()">
   <div>
     <mat-form-field >
-      <input matInput placeholder="Quiz Title" formControlName="title">
+      <input matInput id="quizTitle" placeholder="Quiz Title" formControlName="title">
     </mat-form-field>
   </div>
   <div>
-    <button style="margin-bottom: 10px;"  type="button" mat-raised-button color="accent" (click)="createNewQuestion()">New Question</button>
+    <button style="margin-bottom: 10px;" id="newQuestion"  type="button" mat-raised-button color="accent" (click)="createNewQuestion()">New Question</button>
   </div>
 
   <div  formArrayName="questions">
     <div  *ngFor="let questionControl of createQuiz.controls.questions.controls; let i=index">
       <div [formGroupName]="i">
           <mat-form-field style="margin-right: 45px;" >
-            <input  matInput placeholder="Question" formControlName="title">
+            <input id="ques{{i}}" matInput placeholder="Question" formControlName="title">
           </mat-form-field>
           <button type="button" mat-raised-button color="accent" (click)="createNewOption(i)">New Option</button>
           
@@ -20,9 +20,9 @@
               <div *ngFor="let optionControl of questionControl.controls.options.controls; let j=index">
                   <div [formGroupName]="j">
                     <mat-form-field style="margin-right: 10px;">
-                      <input matInput placeholder="Option" formControlName="answer">
+                      <input id="{{i}}{{j}}" matInput placeholder="Option" formControlName="answer">
                     </mat-form-field >
-                    <mat-checkbox formControlName="correct" style="margin-right: 10px;">Correct answer</mat-checkbox>
+                    <mat-checkbox id="{{i}}{{j}}cor" formControlName="correct" style="margin-right: 10px;">Correct answer</mat-checkbox>
                 </div>
               </div>
           </div>
@@ -65,5 +65,5 @@
     </mat-accordion> -->
 
 
-  <button mat-raised-button color="primary" style="margin-bottom:15px">Save Quiz</button>
+  <button id="saveQuiz" mat-raised-button color="primary" style="margin-bottom:15px">Save Quiz</button>
 </form>

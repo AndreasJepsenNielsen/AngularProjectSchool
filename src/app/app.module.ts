@@ -1,4 +1,5 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {MatSelectModule} from '@angular/material/select';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
@@ -15,7 +16,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import { MatSnackBarModule, MatCheckboxModule } from '@angular/material';
+import { MatSnackBarModule, MatCheckboxModule, MatDatepicker, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatDividerModule} from '@angular/material/divider';
@@ -36,6 +37,7 @@ import { NgReduxRouter, NgReduxRouterModule } from '@angular-redux/router';
 import { rootReducer } from './store';
 import { QuizPipe } from './quiz.pipe';
 import { UpdateQuizComponent } from './update-quiz/update-quiz.component';
+import { PortalIndexComponent } from './portal-index/portal-index.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,7 @@ import { UpdateQuizComponent } from './update-quiz/update-quiz.component';
     QuizComponent,
     QuizPipe,
     UpdateQuizComponent,
+    PortalIndexComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,7 +67,7 @@ import { UpdateQuizComponent } from './update-quiz/update-quiz.component';
     NgReduxModule,   NgReduxRouterModule.forRoot(),
     MatGridListModule, MatMenuModule, MatIconModule, MatToolbarModule, MatButtonModule, MatFormFieldModule, 
     MatInputModule, MatSnackBarModule, MatCardModule, MatDividerModule, MatExpansionModule, MatCheckboxModule, MatRadioModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,MatSelectModule, MatDatepickerModule, MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]
