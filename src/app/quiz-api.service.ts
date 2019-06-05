@@ -25,7 +25,7 @@ export class QuizApiService {
     return this.http.get<Quiz[]>(this.baseUrl);
   }
 
-  updateQuiz(id: string, quiz: Quiz) : Observable<any> {
+  updateQuiz(quiz: Quiz) : Observable<any> {
     quiz.customerId = 'andr9';
     quiz.created = new Date();
     quiz.user = {  // Hardcoded. We remove when we have a proper login
@@ -36,7 +36,7 @@ export class QuizApiService {
       birthDate: undefined 
     };
 
-    return this.http.put<Quiz>(this.baseUrl + id, quiz)
+    return this.http.put(this.baseUrl + '/' + quiz._id, quiz, {responseType: 'text'});
   }
 
   deleteQuiz(id: string) : Observable<any> {

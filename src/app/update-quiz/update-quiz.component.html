@@ -1,87 +1,38 @@
-<form [formGroup]="updateQuiz" (ngSubmit)="updateQuizSubmit()">
+<form [formGroup]="updateQuizGroup" (ngSubmit)="updateQuiz()">
   <div>
-    <mat-form-field >
-      <input matInput placeholder="Quiz Title" formControlName="title">
+    <mat-form-field>
+      <input matInput placeholder="Quiz Title" formControlName="title" id="quiz-title">
     </mat-form-field>
   </div>
+  <div>
+    <button type="button" mat-raised-button color="secondary" (click)="createNewQuestion()" id="new-question">New
+      Question
+    </button>
+  </div>
 
-
-
-
-
-
-
-  <div formArrayName="questions" *ngFor="let question of updateQuiz.controls.questions.controls; let j=index " >
-    <div [formGroupName]="j">
-    <mat-form-field style="margin-right: 10px;" >
-      <input matInput formControlName="title" value="{{question.value.title}}">
-      
-      
-      <!--<input matInput value="{{question.value.questions}}">-->
-    </mat-form-field >
-    <div formArrayName="options" >
-    <div *ngFor="let option of question.controls.options; let i=index" >
+  <div formArrayName="questions">
+    <div *ngFor="let questionControl of updateQuizGroup.controls.questions.controls; let i=index">
       <div [formGroupName]="i">
-        <mat-form-field style="margin-right: 10px;" >
-        <input matInput formControlName="answer" name="{{option.value.answer}}" >
+        <mat-form-field>
+          <input matInput placeholder="Question" formControlName="title" id="question-title">
+        </mat-form-field>
+        <button type="button" mat-raised-button color="secondary" (click)="createNewOption(i)">New Option</button>
 
-      </mat-form-field >
-        <div *ngIf="option.correct === true">
-        
-            <mat-radio-button formControlName="correct" name="{{question.title.title}}"  checked="true" style="margin-right: 10px;"> Correct Answer </mat-radio-button>
+        <div formArrayName="options">
+          <div *ngFor="let optionControl of questionControl.controls.options.controls; let j=index">
+            <div [formGroupName]="j">
+              <mat-form-field>
+                <input matInput placeholder="Option" formControlName="answer" class="option">
+              </mat-form-field>
             
+              <mat-checkbox formControlName="correct">Correct answer</mat-checkbox>
+
+            </div>
+          </div>
         </div>
-        <div *ngIf="option.correct === false">
-        
-            <mat-radio-button formControlName="correct" name="{{question.title.title}}"  checked="false" style="margin-right: 10px;"> Correct Answer </mat-radio-button>
-            
-        </div>
-      
       </div>
-
-      
-
     </div>
   </div>
-  </div>
-  </div>
 
-
-
-
-  <!-- <mat-accordion>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Personal data
-          </mat-panel-title>
-          <mat-panel-description>
-            Type your name and age
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-
-        <mat-form-field>
-          <input matInput placeholder="First name">
-        </mat-form-field>
-
-        <mat-form-field>
-          <input matInput placeholder="Age">
-        </mat-form-field>
-      </mat-expansion-panel>
-      <mat-expansion-panel (opened)="panelOpenState = true"
-                           (closed)="panelOpenState = false">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Self aware panel
-          </mat-panel-title>
-          <mat-panel-description>
-            Currently I am {{panelOpenState ? 'open' : 'closed'}}
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <p>I'm visible because I am open</p>
-      </mat-expansion-panel>
-    </mat-accordion> -->
-
-
-  <button mat-raised-button style="margin-top: 10px;" color="primary">Save Quiz</button>
+  <button mat-raised-button color="primary" id="save-quiz">Save Quiz</button>
 </form>

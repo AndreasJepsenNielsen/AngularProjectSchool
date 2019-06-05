@@ -65,10 +65,10 @@ constructor (
     }); 
   }
 
-  updateQuiz(quiz: Quiz, quizId: string) : void {
+  updateQuiz(quiz: Quiz) : void {
     this.ngRedux.dispatch({
       type: QuizActions.CREATE_QUIZ,
-      payload: {quiz, quizId}
+      payload: {quiz}
     }); 
   }
 

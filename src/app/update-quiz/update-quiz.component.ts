@@ -6,6 +6,7 @@ import { Quiz, Option, Question } from '../entities/quiz';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { QuizActions } from '../quiz.actions';
 import { QuizApiService } from '../quiz-api.service';
+import { Gender } from '../entities/user';
 
 
 @Component({
@@ -14,96 +15,99 @@ import { QuizApiService } from '../quiz-api.service';
   styleUrls: ['./update-quiz.component.scss']
 })
 export class UpdateQuizComponent implements OnInit {
+  updateQuizGroup: FormGroup;
   quiz: Quiz;
-  updateQuiz: FormGroup;
+  selected=-1;
 
-  constructor(private router: Router, private route: ActivatedRoute, private ngRedux: NgRedux<AppState>, private fb: FormBuilder,private quizActions: QuizActions, private quizApi: QuizApiService) { }
-
-  get questions() { return (this.updateQuiz.get('questions')) as FormArray; }
-  get options () { return (this.updateQuiz.get(['questions', 'options'])) as FormArray;}
-  
-
-  
+  constructor(private fb: FormBuilder,
+              private route: ActivatedRoute,
+              private NgRedux: NgRedux<AppState>,
+              private api: QuizApiService,
+              private quizactions: QuizActions,
+              private router: Router) {
+  }
 
   ngOnInit() {
-    let id = this.route.snapshot.paramMap.get('id');
-    console.log(id)
-    this.ngRedux.select(state => state.quizzes).subscribe(result => {
-      this.quiz = result.quizzes.find(quiz => quiz._id === id);
-      console.log(result.quizzes)
+    const id = this.route.snapshot.paramMap.get('id');
+    this.NgRedux.select(state => state.quizzes).subscribe(res => {
+      this.quiz = res.quizzes.find(quiz => quiz._id == id);
     });
 
-    console.log(this.quiz._id)
-    console.log(this.quiz.questions)
-   
-    this.updateQuiz = this.fb.group({
-      title: this.quiz.title,
-      questions: this.fb.array([
-        this.fb.group({
-          title: "",
-          options: this.fb.array([
-           this.fb.group({
-             answer: "",
-             correct: false
-           })
-      ])
-      }),
-      
-      
-      ]),  
-    })
+    this.updateQuizGroup = this.fb.group({
+      title: [this.quiz.title],
+      questions: this.fb.array([])
+    });
 
-    for( let i = 0; i < this.quiz.questions.length; i++){
+    let index = 0;
+    this.quiz.questions.forEach(element => {
+      const questions = this.updateQuizGroup.controls.questions as FormArray;
+      questions.push(this.fb.group({
+        title: [element.title],
+        options: this.fb.array([])
+      }));
 
-      this.addProduct(this.quiz.questions[i])
-      console.log((<FormArray>(this.questions.controls[i])).controls['options'])
+      // @ts-ignore
+      const options = questions.controls[index].controls.options as FormArray;
 
-      console.log(this.questions.controls[i].get('options'))
-      this.quiz.questions[i].options.forEach(element => {
-        console.log()
-        console.log(this.options);
-        
-        })
-      }
-        
-    
-    this.questions.removeAt(0)
-    console.log(this.updateQuiz)
+      this.quiz.questions[index].options.forEach(option => {
+        options.push(this.fb.group({
+          answer: [option.answer],
+          correct: [option.correct]
+        }));
+      });
+      index++;
 
+    });
+
+    console.log(this.updateQuizGroup)
   }
 
 
+  createNewQuestion() {
+    const question = this.fb.group({
+      title: ['', Validators.required],
+      options: this.fb.array([])
+    });
 
-  addProduct(i: Question) {
-    this.questions.push(this.fb.group({
-      title: i.title,
-      options: i.options
-    }));
+    const questions = this.updateQuizGroup.controls.questions as FormArray;
+    const options = question.controls.options as FormArray;
+    options.push(this.createNewOptionGroup());
+    options.push(this.createNewOptionGroup());
+    // console.log(options);
+    questions.push(question);
   }
 
-  addOption(j: Option) {
-    if(this.options){
-      //console.log(j)
-      //console.log(j.answer)
-      let option: Option;
-      option.answer = j.answer
-      option.correct = j.correct
-    this.options.push(this.fb.group({
-      answer: j.answer, correct: j.correct
-    }))
+  createNewOption(questionIndex: number) {
+    const option = this.createNewOptionGroup();
+    const questions = this.updateQuizGroup.controls.questions as FormArray;
+    // console.log(questions);
+    const options = (<FormArray> questions.controls[questionIndex]).controls['options'] as FormArray;
+    // console.log(options);
+    options.push(option);
   }
-}
 
-  updateQuizSubmit() {
-    let quizUpdate = this.updateQuiz.value as Quiz;
+  createNewOptionGroup(): FormGroup {
+    return this.fb.group({
+      answer: ['', Validators.required],
+      correct: [false, Validators.required]
+    });
+  }
 
-    this.quizApi.updateQuiz(this.quiz._id, quizUpdate).subscribe(updateTheQuiz => {
-      console.log("updatethequiz: " + updateTheQuiz);
-      this.quizActions.updateQuiz(updateTheQuiz, this.quiz._id);
+  updateQuiz() {
+    const id = this.route.snapshot.paramMap.get('id');
+    let quiz = this.updateQuizGroup.value as Quiz;
+    quiz._id = id;
+    console.log(quiz);
+    // Call api and save quiz
+    this.api.updateQuiz(quiz).subscribe(quizFromWs => {
+      // Save quiz locally to redux with the quiz returned from WS (Includes the generated id)
+      this.quizactions.updateQuiz(quizFromWs);
       this.router.navigate(['/portal/display-quizzes']);
     }, error => {
-      console.log("something bad when updating the quiz happened", error);
+      // Code to handle WS Error here
+      console.log('Something went wrong: ' + error);
     });
 
   }
+
 }
