@@ -1,38 +1,69 @@
 <form [formGroup]="updateQuizGroup" (ngSubmit)="updateQuiz()">
   <div>
-    <mat-form-field>
-      <input matInput placeholder="Quiz Title" formControlName="title" id="quiz-title">
+    <mat-form-field >
+      <input matInput id="quizTitle" placeholder="Quiz Title" formControlName="title">
     </mat-form-field>
   </div>
   <div>
-    <button type="button" mat-raised-button color="secondary" (click)="createNewQuestion()" id="new-question">New
-      Question
-    </button>
+    <button style="margin-bottom: 10px;" id="newQuestion"  type="button" mat-raised-button color="accent" (click)="createNewQuestion()">New Question</button>
   </div>
 
-  <div formArrayName="questions">
+  <div  formArrayName="questions">
     <div *ngFor="let questionControl of updateQuizGroup.controls.questions.controls; let i=index">
       <div [formGroupName]="i">
-        <mat-form-field>
-          <input matInput placeholder="Question" formControlName="title" id="question-title">
-        </mat-form-field>
-        <button type="button" mat-raised-button color="secondary" (click)="createNewOption(i)">New Option</button>
-
-        <div formArrayName="options">
-          <div *ngFor="let optionControl of questionControl.controls.options.controls; let j=index">
-            <div [formGroupName]="j">
-              <mat-form-field>
-                <input matInput placeholder="Option" formControlName="answer" class="option">
-              </mat-form-field>
-            
-              <mat-checkbox formControlName="correct">Correct answer</mat-checkbox>
-
-            </div>
+          <mat-form-field style="margin-right: 45px;" >
+            <input id="ques{{i}}" matInput placeholder="Question" formControlName="title">
+          </mat-form-field>
+          <button type="button" mat-raised-button color="accent" (click)="createNewOption(i)">New Option</button>
+          
+          <div formArrayName="options">
+              <div *ngFor="let optionControl of questionControl.controls.options.controls; let j=index">
+                  <div [formGroupName]="j">
+                    <mat-form-field style="margin-right: 10px;">
+                      <input id="{{i}}{{j}}" matInput placeholder="Option" formControlName="answer">
+                    </mat-form-field >
+                    <mat-checkbox id="{{i}}{{j}}cor" formControlName="correct" style="margin-right: 10px;">Correct answer</mat-checkbox>
+                </div>
+              </div>
           </div>
-        </div>
       </div>
     </div>
   </div>
 
-  <button mat-raised-button color="primary" id="save-quiz">Save Quiz</button>
+
+  <!-- <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Personal data
+          </mat-panel-title>
+          <mat-panel-description>
+            Type your name and age
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+    
+        <mat-form-field>
+          <input matInput placeholder="First name">
+        </mat-form-field>
+    
+        <mat-form-field>
+          <input matInput placeholder="Age">
+        </mat-form-field>
+      </mat-expansion-panel>
+      <mat-expansion-panel (opened)="panelOpenState = true"
+                           (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Self aware panel
+          </mat-panel-title>
+          <mat-panel-description>
+            Currently I am {{panelOpenState ? 'open' : 'closed'}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>I'm visible because I am open</p>
+      </mat-expansion-panel>
+    </mat-accordion> -->
+
+
+  <button id="updateQuiz" mat-raised-button color="primary" style="margin-bottom:15px">Save Quiz</button>
 </form>
