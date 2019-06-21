@@ -15,12 +15,7 @@ export class QuizPipe implements PipeTransform {
 
     if(quizzes.filter(quiz=> quiz.title.toUpperCase().indexOf(search.toString().toUpperCase()) !== -1)){
     return quizzes.filter(quiz => quiz.title.toUpperCase().indexOf(search.toString().toUpperCase()) !== -1 )      
-    }
-
-    /*if(quizzes.filter(quiz=> quiz.user.username.indexOf(search.toString()) !== -1)){
-      return quizzes.filter(quiz => quiz.user.username.indexOf(search.toString()) !== -1 )      
-      }*/
-    
+    }    
   }
 
 }

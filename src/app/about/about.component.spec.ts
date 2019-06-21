@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+/*import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AboutComponent } from './about.component';
 
@@ -22,4 +22,4 @@ describe('AboutComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-});
+});*/
