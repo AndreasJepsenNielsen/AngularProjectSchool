@@ -10,7 +10,6 @@ import { Gender } from './entities/user';
 export class QuizApiService {
   private baseUrl: string = 'http://angular2api2.azurewebsites.net/api/internships/';
   
-
   constructor(private http: HttpClient) {}
   
   createQuiz(quiz: Quiz) : Observable<any> {
@@ -18,7 +17,6 @@ export class QuizApiService {
     quiz.customerId = 'andr9';
     quiz.created = new Date();
     return this.http.post(this.baseUrl, quiz);
-    
   }
 
   getAllQuizzes(): Observable<Quiz[]> {
@@ -35,41 +33,12 @@ export class QuizApiService {
       gender: Gender.MALE, 
       birthDate: undefined 
     };
-
+    // type of the returned observable
     return this.http.put(this.baseUrl + '/' + quiz._id, quiz, {responseType: 'text'});
   }
 
   deleteQuiz(id: string) : Observable<any> {
     const urlDelete = this.baseUrl + id;
-    console.log(urlDelete)
     return this.http.delete(urlDelete);
   }
-
-  getQuiz(quiz: Quiz) : Quiz {
-    return { 
-      _id: quiz._id, visible: quiz.visible, user: quiz.user, title: quiz.title, 
-     questions: quiz.questions, ratings: quiz.ratings, created: quiz.created
-    };
-  }
-
-  createQuizzes(quizzes: Quiz[]) : Quiz[]{
-    let tempList : Quiz[] = [];
-
-    
-   
-    quizzes.map(item => {
-      
-      //console.log(this.getQuiz(item))
-      tempList.push(this.getQuiz(item))
-      
-      
-    })
-    //console.log(tempList)
-   
-
-   return tempList;
-    
-  }
-
-
 }

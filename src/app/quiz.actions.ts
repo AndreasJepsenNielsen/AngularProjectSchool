@@ -18,9 +18,6 @@ constructor (
   static GET_QUIZZES_SUCCESS: string = 'GET_QUIZZES_SUCCESS';
   static GET_QUIZZES_FAILED: string = 'GET_QUIZZES_FAILED';
 
-  static CREATE_RATING: string = 'CREATE_RATING'; 
-
-
   getQuizzes() : void {
     this.ngRedux.dispatch({ type: QuizActions.GET_QUIZZES_LOADING }); // start a "spinner"
 
@@ -38,18 +35,8 @@ constructor (
         payload: error
       })
     });
-
-    // this.ngRedux.dispatch({type: QuizActions.GET_QUIZZES_SUCCESS}) // We do not wait for the reponse
   }
 
-
-  createRating(rating: Rating, quizId: string) {
-    this.ngRedux.dispatch({
-      type: QuizActions.CREATE_RATING,
-      // payload: {rating: rating, quizId: quizId}
-      payload: {rating, quizId}
-    })
-  }
 
   deleteQuiz(quizId: string) : void  {
     this.ngRedux.dispatch({
@@ -67,7 +54,7 @@ constructor (
 
   updateQuiz(quiz: Quiz) : void {
     this.ngRedux.dispatch({
-      type: QuizActions.CREATE_QUIZ,
+      type: QuizActions.UPDATE_QUIZ,
       payload: {quiz}
     }); 
   }

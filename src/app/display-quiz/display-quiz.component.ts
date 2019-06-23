@@ -27,17 +27,13 @@ export class DisplayQuizComponent implements OnInit {
     });
     console.log(this.quiz)
     // Load the quiz in the html
-
   }
 
     onSelect(question: Question, option: Option) {
       question.options.forEach((x) => { if (x.answer !== option.answer) x.selected = false; });
       question.options.forEach((x) => { if (x.answer == option.answer) x.selected = true; });
-
-      console.log(question)
     }
     
-
     isAnswered(question: Question) {
       return question.options.find(x => x.selected) ? 'Answered' : 'Not Answered';
     };
@@ -45,7 +41,6 @@ export class DisplayQuizComponent implements OnInit {
     isCorrect(question: Question) {
       console.log(question.options.every(x => x.selected === x.correct) ? 'correct' : 'wrong')
       return question.options.every(x => x.selected === x.correct) ? 'correct' : 'wrong';
-
     };
   
 

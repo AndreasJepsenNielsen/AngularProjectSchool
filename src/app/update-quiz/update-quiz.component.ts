@@ -17,7 +17,6 @@ import { Gender } from '../entities/user';
 export class UpdateQuizComponent implements OnInit {
   updateQuizGroup: FormGroup;
   quiz: Quiz;
-  selected=-1;
 
   constructor(private fb: FormBuilder,
               private route: ActivatedRoute,
