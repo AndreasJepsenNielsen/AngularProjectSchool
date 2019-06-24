@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgRedux } from '@angular-redux/store';
 import { AppState } from '../store';
-import { Quiz, Option, Question } from '../entities/quiz';
+import { Quiz } from '../entities/quiz';
 import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
 import { QuizActions } from '../quiz.actions';
 import { QuizApiService } from '../quiz-api.service';
-import { Gender } from '../entities/user';
 
 
 @Component({
@@ -97,13 +96,12 @@ export class UpdateQuizComponent implements OnInit {
     let quiz = this.updateQuizGroup.value as Quiz;
     quiz._id = id;
     console.log(quiz);
-    // Call api and save quiz
+    
     this.api.updateQuiz(quiz).subscribe(quizFromWs => {
-      // Save quiz locally to redux with the quiz returned from WS (Includes the generated id)
+
       this.quizactions.updateQuiz(quizFromWs);
       this.router.navigate(['/portal/display-quizzes']);
     }, error => {
-      // Code to handle WS Error here
       console.log('Something went wrong: ' + error);
     });
 

@@ -13,8 +13,6 @@ export class AuthService {
   redirectUrl: string;
 
   login(): Observable<boolean> {
-      // Here, we want to call a webservice to log in.
-
     // Intercepts each emission on the source and runs a function, but returns an output which is identical to the source
     return of(true).pipe(
       delay(1000),

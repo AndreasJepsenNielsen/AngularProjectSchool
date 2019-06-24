@@ -8,14 +8,14 @@
 
   <div *ngFor="let option of question.options">
     <mat-radio-button name="{{question.title}}" (change)="onSelect(question, option);" value="{{option.answer}}" style="margin-right: 10px;"> <p class="mat-body" >{{option.answer}}</p></mat-radio-button>
-    
   </div>
   <br>
-
  
 </div>
 <button mat-raised-button type="button" color="primary" (click)="onSubmit();">Submit Quiz</button>
 </div>
+
+
  <div style="margin-top: 80px; text-align: center" class="result" *ngIf="mode=='result'">
     <div class="mat-title" >Quiz Result</div>
     <div *ngFor="let question of quiz.questions; let index = index">
@@ -30,8 +30,6 @@
       </div>
     </div>
   
-
-
     <button type="button" mat-raised-button color="primary" [routerLink]="['/portal/display-quizzes']">Back</button>
   </div>
   <hr />

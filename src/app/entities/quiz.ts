@@ -7,26 +7,18 @@ export class Quiz {
   title: string;
   created?: Date; // ? = optional field
   questions: Question[]; 
-  ratings?: Rating[];
   customerId?: string;
-
 }
-
 
 export class Question {
   title: string;
   options: Option[];
   answered?: boolean = false;
 }
+
 export class Option {
   answer: string;
   correct: boolean;
   selected?: boolean = false;
 }
-export class Rating {
-  grade: number;
-  user: User;
-  // timestamp: Date;
-  // title: string;
-  // message: string;
-}
+

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -23,18 +23,5 @@ export class RegisterComponent implements OnInit  {
   
   onSubmit() {
     console.log(this.registerForm);
-
-    /*
-    if (this.registerForm.valid) {
-      // Send the data to the server to verfy the user login
-
-    }
-    else
-    {
-      //
-      
-      
-    }
-    */
   }
 }

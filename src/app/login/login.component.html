@@ -13,7 +13,7 @@
             
           <div>
             <mat-form-field>
-              <!-- <p>Username</p> -->
+              <!-- Username -->
               <input matInput id="username" placeholder="Username" formControlName="username">
               
               <mat-error *ngIf="loginForm.controls.username.errors?.required && loginForm.controls.username.touched">
@@ -27,7 +27,7 @@
         
           <div>
             <mat-form-field>
-              <!-- <p>Password</p> -->
+              <!-- Password -->
               <input matInput id="password" placeholder="Password" type="password" formControlName="password">
               <mat-error *ngIf="!loginForm.controls.password.valid && loginForm.controls.password.dirty">
                 You must fill out the password

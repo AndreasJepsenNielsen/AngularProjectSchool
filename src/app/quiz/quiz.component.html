@@ -1,6 +1,4 @@
 <mat-card class="example-card" (click)="emitQuizClicked()">
-
-
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
     <mat-card-title title="{{quizInput.title}}">{{(quizInput.title.length>16)?  (quizInput.title | slice:0:16 | uppercase)+'...'  :(quizInput.title)  }}</mat-card-title>

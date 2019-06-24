@@ -18,7 +18,6 @@ export class HomeComponent implements OnInit {
       // When notified
       this.loggedIn = res.isLoggedIn; 
     });
- 
   }
 
   onLogoutClick() {
