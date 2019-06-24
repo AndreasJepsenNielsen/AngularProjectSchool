@@ -5,11 +5,11 @@ import { QuizState } from './store';
 var deepFreeze = require('deep-freeze');
 
 describe('quiz reducer tests', () => {
-  
-  // each it block is a test case.
   it('should set state to true when logging in', () => {
     let startState = {isLoggedIn: undefined, quizzes: [], isLoading: false};
+
     deepFreeze(startState);
+
     let actionObj = { 
       type: QuizActions.LOG_IN, payload: true};
     let newStateObj = quizReducer(startState, actionObj);
@@ -32,7 +32,6 @@ describe('quiz reducer tests', () => {
     expect(newStateObj.quizzes.length).toBe(1);
     expect(newStateObj.quizzes[0].title).toBe('Test quiz');
   });
-
   
   it('should delete the new quiz', () => {
     // Arrange - Act - Assert

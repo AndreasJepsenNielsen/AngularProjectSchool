@@ -13,7 +13,6 @@ export class QuizApiService {
   constructor(private http: HttpClient) {}
   
   createQuiz(quiz: Quiz) : Observable<any> {
-    //url, body
     quiz.customerId = 'andr9';
     quiz.created = new Date();
     return this.http.post(this.baseUrl, quiz);
@@ -26,7 +25,7 @@ export class QuizApiService {
   updateQuiz(quiz: Quiz) : Observable<any> {
     quiz.customerId = 'andr9';
     quiz.created = new Date();
-    quiz.user = {  // Hardcoded. We remove when we have a proper login
+    quiz.user = {  
       _id: '1', 
       username: 'Roggels', 
       email: 'rogg@els.dk', 

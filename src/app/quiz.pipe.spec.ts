@@ -30,6 +30,4 @@ describe('QuizPipe', () => {
     let searchPipe = pipe.transform(quizzes,"")
     expect(searchPipe.length).toBe(4);
   })
-
-  
 });

@@ -19,12 +19,9 @@ constructor (
   static GET_QUIZZES_FAILED: string = 'GET_QUIZZES_FAILED';
 
   getQuizzes() : void {
-    this.ngRedux.dispatch({ type: QuizActions.GET_QUIZZES_LOADING }); // start a "spinner"
+    this.ngRedux.dispatch({ type: QuizActions.GET_QUIZZES_LOADING }); // starts a "spinner"
 
-    // call the ws
     this.api.getAllQuizzes().subscribe(quizzes => {
-      console.log(quizzes);
-      console.log(quizzes.filter(quiz => quiz.customerId === 'andr9'));
       this.ngRedux.dispatch({
         type: QuizActions.GET_QUIZZES_SUCCESS,
         payload: quizzes.filter(quiz => quiz.customerId === 'andr9')
@@ -36,7 +33,6 @@ constructor (
       })
     });
   }
-
 
   deleteQuiz(quizId: string) : void  {
     this.ngRedux.dispatch({
@@ -60,8 +56,6 @@ constructor (
   }
 
   setLoggedIn(isLoggedIn: boolean): void {
-    console.log(isLoggedIn);
-    
     this.ngRedux.dispatch({
       type: QuizActions.LOG_IN,
       payload: isLoggedIn

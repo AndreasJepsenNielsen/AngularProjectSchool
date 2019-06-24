@@ -36,9 +36,6 @@ const routes: Routes = [
   { path: '**', component: PageNotFoundComponent } // wildcard - if no routes matched, display this
  ];
  
-
-// Define available routes
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
